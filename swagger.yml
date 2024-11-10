@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Star Wars API
+  version: 1.0.0
+  description: API para gestionar personajes de Star Wars
+
+servers:
+  - url: http://localhost:3000
+    description: Serverless offline
+
+paths:
+  /api/characters/{id}:
+    get:
+      summary: Obtener personaje por ID
+      description: Obtiene la información de un personaje específico usando su ID.
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+          description: ID del personaje a obtener
+      responses:
+        '200':
+          description: Datos del personaje obtenidos exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      nombre:
+                        type: string
+                        example: Luke Skywalker
+                      altura:
+                        type: string
+                        example: "1.72"
+                      masa:
+                        type: string
+                        example: "77"
+                      color_cabello:
+                        type: string
+                        example: rubio
+                      color_piel:
+                        type: string
+                        example: clara
+                      color_ojos:
+                        type: string
+                        example: azul
+                      anio_nacimiento:
+                        type: string
+                        example: 1998
+                      genero:
+                        type: string
+                        example: male
+        '404':
+          description: Personaje no encontrado
+  /api/characters:
+    post:
+      summary: Crear nuevo personaje
+      description: Crea un nuevo personaje en la base de datos.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                nombre:
+                  type: string
+                  example: Luke Skywalker
+                altura:
+                  type: string
+                  example: "1.72"
+                masa:
+                  type: string
+                  example: "77"
+                color_cabello:
+                  type: string
+                  example: rubio
+                color_piel:
+                  type: string
+                  example: clara
+                color_ojos:
+                  type: string
+                  example: azul
+                anio_nacimiento:
+                  type: string
+                  example: 1998
+                genero:
+                  type: string
+                  example: male
+      responses:
+        '201':
+          description: Personaje creado exitosamente
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: object
+                    properties:
+                      id:
+                        type: integer
+                        example: 96
+                      nombre:
+                        type: string
+                        example: Luke Skywalker
+                      altura:
+                        type: string
+                        example: "1.72"
+                      masa:
+                        type: string
+                        example: "77"
+                      color_cabello:
+                        type: string
+                        example: rubio
+                      color_piel:
+                        type: string
+                        example: clara
+                      color_ojos:
+                        type: string
+                        example: azul
+                      anio_nacimiento:
+                        type: string
+                        example: 1998
+                      genero:
+                        type: string
+                        example: male

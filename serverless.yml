@@ -1,0 +1,48 @@
+service: star-wars-api-serverless
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  region: sa-east-1
+  environment:
+    MYSQL_HOST: $MYSQL_HOST
+    MYSQL_PORT: $MYSQL_PORT
+    MYSQL_USER: $MYSQL_USER
+    MYSQL_PASSWORD: $MYSQL_PASSWORD
+    MYSQL_DATABASE: $MYSQL_DATABASE
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+package:
+  include:
+    - swagger.yml
+
+functions:
+  getCharacterHandler:
+    handler: src/infrastructure/handlers/getCharacterHandler.getCharacterHandler
+    events:
+      - httpApi:
+          path: /api/characters/{id}
+          method: get
+  saveCharacterHandler:
+    handler: src/infrastructure/handlers/saveCharacterHandler.saveCharacterHandler
+    events:
+      - httpApi:
+          path: /api/characters
+          method: post
+  swaggerDocs:
+    handler: src/infrastructure/handlers/swaggerHandler.swaggerDocs
+    events:
+      - httpApi:
+          path: /swagger
+          method: get
+  swaggerUI:
+    handler: src/infrastructure/handlers/swaggerHandler.swaggerUI
+    events:
+      - httpApi:
+          path: /docs
+          method: get

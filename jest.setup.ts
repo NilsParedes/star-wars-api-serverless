@@ -1,0 +1,5 @@
+process.env.MYSQL_HOST='localhost'
+process.env.MYSQL_PORT='3306'
+process.env.MYSQL_USER='root'
+process.env.MYSQL_PASSWORD='password'
+process.env.MYSQL_DATABASE='star_wars'
